@@ -8,11 +8,43 @@ import {
   DEMERGE_CATEGORY
 } from '../actions'
 
+/* Initial state default */
 export const initialState = {
   posts: {},
   comments: {},
   categories: {}
 }
+
+/* Action Creators */
+export const mergePosts = (posts = {}) => ({
+  type: MERGE_POSTS,
+  posts
+})
+
+export const demergePost = (post = {}) => ({
+  type: DEMERGE_POST,
+  post
+})
+
+export const mergeComments = (comments = {}) => ({
+  type: MERGE_COMMENTS,
+  comments
+})
+
+export const demergeComment = (comment = {}) => ({
+  type: DEMERGE_COMMENT,
+  comment
+})
+
+export const mergeCategories = (categories = {}) => ({
+  type: MERGE_CATEGORIES,
+  categories
+})
+
+export const demergeCategory = (category = {}) => ({
+  type: DEMERGE_CATEGORY,
+  category
+})
 
 const ACTION_HANDLERS = {
   [MERGE_POSTS]: (state, { posts }) => {
@@ -79,7 +111,7 @@ const ACTION_HANDLERS = {
   }
 }
 
-export default entitiesReducer = (state = initialState, action) => {
+export default function entitiesReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

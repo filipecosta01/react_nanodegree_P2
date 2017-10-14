@@ -66,34 +66,3 @@ export const MERGE_CATEGORIES = 'MERGE_CATEGORIES'
 export const DEMERGE_POST = 'DEMERGE_POST'
 export const DEMERGE_COMMENT = 'DEMERGE_COMMENT'
 export const DEMERGE_CATEGORY = 'DEMERGE_CATEGORY'
-
-/* Action Creators */
-export const mergePosts = (posts = {}) => ({
-  type: MERGE_POSTS,
-  posts
-})
-
-export const demergePost = (post = {}) => ({
-  type: DEMERGE_POST,
-  post
-})
-
-export const mergeComments = (comments = {}) => ({
-  type: MERGE_COMMENTS,
-  comments
-})
-
-export const demergeComment = (comment = {}) => ({
-  type: DEMERGE_COMMENT,
-  comment
-})
-
-export const mergeCategories = (categories = {}) => ({
-  type: MERGE_CATEGORIES,
-  categories
-})
-
-export const demergeCategory = (category = {}) => ({
-  type: DEMERGE_CATEGORY,
-  category
-})
