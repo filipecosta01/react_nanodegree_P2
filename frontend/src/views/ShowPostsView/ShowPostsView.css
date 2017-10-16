@@ -1,0 +1,24 @@
+.ShowPostsView {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.white-text {
+  color: white;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.posts-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-element {
+  width: 50%;
+  align-self: center;
+}

@@ -39,7 +39,7 @@ const dataStore = storageAvailable('localStorage') ? window.localStorage : memor
 const fetchToken = () => {
   let token = dataStore.getItem('token')
   if (!token) {
-    token = JSON.parse(Math.random().toString(36).substr(2))
+    token = Math.random().toString(36).substr(2)
     dataStore.setItem('token', token)
   }
   

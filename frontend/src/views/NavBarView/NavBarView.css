@@ -1,0 +1,53 @@
+.NavBarView {
+  height: 60px;
+  display: flex;
+  background-color: #d9d9d9;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 45px 0 45px;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  max-height: 40px;
+
+}
+
+.main-container ul {
+  margin: 0;
+  align-items: center;
+}
+
+.select {
+  flex: 2;
+}
+
+.categories-container {
+  flex: 7;
+  display: flex;
+  justify-content: space-around;
+}
+
+.categories-container a {
+  margin-right: 20px;
+  color: black;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.categories-container a:hover {
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.categories-container li {
+  list-style-type: none;
+  text-transform: capitalize;
+}
+
+.button {
+  flex: 1
+}

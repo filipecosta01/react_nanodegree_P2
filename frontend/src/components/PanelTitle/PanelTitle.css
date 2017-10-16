@@ -1,0 +1,27 @@
+.PanelTitle {
+
+}
+
+.panel-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-info-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.italic {
+  font-style: italic;
+}

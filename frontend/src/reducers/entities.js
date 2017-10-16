@@ -52,7 +52,7 @@ const ACTION_HANDLERS = {
       ...state,
       posts: {
         ...state.posts,
-        posts
+        ...posts
       }
     }
   },
@@ -73,7 +73,7 @@ const ACTION_HANDLERS = {
       ...state,
       comments: {
         ...state.comments,
-        comments
+        ...comments
       }
     }
   },
@@ -94,7 +94,7 @@ const ACTION_HANDLERS = {
       ...state,
       categories: {
         ...state.categories,
-        categories
+        ...categories
       }
     }
   },

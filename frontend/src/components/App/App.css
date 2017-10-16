@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+.header-container {
+  padding: 0 35px;
+  display: flex;
+  align-items: center;
+  background-color: #F6F6F6;
+}
+
+.nav-image {
+  padding: 10px;
+  max-width: 200px;
+  max-height: 55px;
+}
+
+.nav-title {
+  flex: 1;
+  color: #2B2B2B;
+  font-size: 40px;
+  text-align: center;
+}
+
+.body-main-container {
+  height: 90vh;
+  overflow-y: auto;
+  background-color: #4d4d4d;
+  text-align: center;
+}
+
+@media only screen and (max-width: 375px) {
+  .nav-title {
+    display: none;
+  }
+
+  .header-container {
+    justify-content: center;
+  }
+}

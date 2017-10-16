@@ -1,5 +1,5 @@
 import { PostAPI } from '../utils/api'
-import { normalize, arrayOf } from 'normalizr'
+import { normalize } from 'normalizr'
 
 import * as schemas from '../schemas'
 import * as entities from './entities'
@@ -58,14 +58,13 @@ export const getPosts = () => async dispatch => {
 
 /* Actions Success */
 export const getPostsSuccess = ({ response, dispatch }) => {
-  dispatch({ type: GET_POSTS_SUCCESS })
-
-  const normalized = normalize(response, arrayOf(schemas.post))
+  const normalized = normalize(response, [ schemas.post ] )
   const { posts } = normalized.entities
 
   dispatch(entities.mergePosts(posts))
 
-  console.log(response)
+  dispatch({ type: GET_POSTS_SUCCESS })
+
   return response
 }
 
