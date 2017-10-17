@@ -39,7 +39,13 @@ export const initialState = {
   error: null,
   messages: {
     postsLoadedFailure: false,
-    postsLoadedSuccess: false
+    postsLoadedSuccess: false,
+
+    addPostVoteFailure: false,
+    addPostVoteSuccess: false,
+
+    postLoadedFailure: false,
+    postLoadedSuccess: false
   },
   isLoading: false
 }
@@ -52,7 +58,40 @@ export const getPosts = () => async dispatch => {
     const response = await PostAPI.listAllPosts()
     return getPostsSuccess({ response, dispatch })
   } catch(error) {
-    
+    dispatch({ type: GET_POSTS_FAILURE, error })
+  }
+}
+
+export const getPost = (postId) => async dispatch => {
+  dispatch({ type: GET_POST })
+
+  try {
+    const response = await PostAPI.getPostDetails(postId)
+    return getPostSuccess({ response, dispatch })
+  } catch(error) {
+    dispatch({ type: GET_POSTS_FAILURE, error })
+  }
+}
+
+export const getPostComments = (postId) => async dispatch => {
+  dispatch({ type: GET_POST_COMMENTS })
+
+  try {
+    const response = await PostAPI.listAllComments(postId)
+    return getPostCommentsSuccess({ response, dispatch })
+  } catch(error) {
+    dispatch({ type: GET_POST_COMMENTS_FAILURE, error })
+  }
+}
+
+export const voteOnPost = (postId, voteType) => async dispatch => {
+  dispatch({ type: ADD_POST_VOTE })
+
+  try {
+    const response = await PostAPI.votePost(postId, voteType)
+    return voteOnPostSuccess({ response, dispatch })
+  } catch(error) {
+    dispatch({ type: ADD_POST_VOTE_FAILURE, error })
   }
 }
 
@@ -65,7 +104,41 @@ export const getPostsSuccess = ({ response, dispatch }) => {
 
   dispatch({ type: GET_POSTS_SUCCESS })
 
-  return response
+  return normalized.result
+}
+
+/* Actions Success */
+export const getPostSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.post )
+  const { posts } = normalized.entities
+
+  dispatch(entities.mergePosts(posts))
+
+  dispatch({ type: GET_POST_SUCCESS })
+
+  return normalized.result
+}
+
+export const getPostCommentsSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, [ schemas.comment ] )
+  const { comments } = normalized.entities
+
+  dispatch(entities.mergeComments(comments))
+
+  dispatch({ type: GET_POST_COMMENTS_SUCCESS })
+
+  return normalized.result
+}
+
+export const voteOnPostSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.post )
+  const { posts } = normalized.entities
+
+  dispatch(entities.mergePosts(posts))
+
+  dispatch({ type: ADD_POST_VOTE_SUCCESS })
+
+  return normalized.result
 }
 
 /* Action Handler */
@@ -92,6 +165,52 @@ const ACTION_HANDLERS = {
       postsLoadedSuccess: true
     }
   }),
+
+  [GET_POST]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [GET_POST_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      postLoadedFailure: true,
+      postLoadedSuccess: false
+    }
+  }),
+  [GET_POST_SUCCESS]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      postLoadedFailure: false,
+      postLoadedSuccess: true
+    }
+  }),
+
+  [ADD_POST_VOTE]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [ADD_POST_VOTE_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      addPostVoteFailure: true,
+      addPostVoteSuccess: false
+    }
+  }),
+  [ADD_POST_VOTE_SUCCESS]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      addPostVoteFailure: false,
+      addPostVoteSuccess: true
+    }
+  })
 }
 
 export default function postReducer(state = initialState, action) {

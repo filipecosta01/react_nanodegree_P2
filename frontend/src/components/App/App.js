@@ -5,6 +5,7 @@ import './App.css'
 import logo from '../../images/logo.png'
 
 import NavBar from '../../containers/NavBarContainer'
+import ShowPost from '../../containers/ShowPostContainer'
 import ShowPosts from '../../containers/ShowPostsContainer'
 
 class App extends Component {
@@ -13,16 +14,16 @@ class App extends Component {
     super(props)
 
     this.state = {
-      selectedFilter: 'recent'
+      selectedFilter: 'high'
     }
   }
 
   handleChangeFilter = value => this.setState({ selectedFilter: value })
 
-  handleResetFilter = (event) => this.setState({ selectedFilter: 'recent' })
+  handleResetFilter = (event) => this.setState({ selectedFilter: 'high' })
 
   render() {
-    const { selectedFilter, history } = this.state
+    const { selectedFilter } = this.state
 
     return (
       <div>
@@ -57,10 +58,8 @@ class App extends Component {
             />
           )
           }/>
-          <Route path="/posts/:postId" render={({ history }) => (
-            <div>
-              View Details
-            </div>
+          <Route path="/posts/:postId" render={({ history, match }) => (
+            <ShowPost onLoad={this.handleResetFilter} postId={match.params.postId} />
           )}/>
         </section>
       </div>

@@ -25,3 +25,20 @@
 .italic {
   font-style: italic;
 }
+
+.left-subtitle-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.margin-right {
+  margin-right: 10px;
+}
+
+.buttons-container {
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}

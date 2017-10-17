@@ -1,11 +1,11 @@
 export const VOTE_SCORE = [
   {
-    label: 'High vote score first',
+    label: 'More positive votes first',
     value: 'high',
     postSortField: '-voteScore'
   },
   {
-    label: 'Less vote score first',
+    label: 'More negative votes first',
     value: 'less',
     postSortField: 'voteScore'
   },

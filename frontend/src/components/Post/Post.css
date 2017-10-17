@@ -1,3 +1,16 @@
 .Post {
 
 }
+
+.post-body {
+  font-size: 18px;
+}
+
+.posts-comments {
+  margin-top: 35px;
+}
+
+.panel-element {
+  text-align: left;
+  background-color: rgb(188, 229, 245);
+}

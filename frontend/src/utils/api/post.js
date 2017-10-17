@@ -8,6 +8,12 @@ export const PostAPI = {
     })
   },
 
+  listAllComments(postId) {
+    return xhr(`${API_BASE}/posts/${postId}/comments`, {
+      method: 'GET'
+    })
+  },
+
   addPost(post) {
     return xhr(`${API_BASE}/posts`, {
       method: 'POST',
@@ -21,10 +27,10 @@ export const PostAPI = {
     })
   },
 
-  votePost({ id, option }) {
+  votePost(id, option) {
     return xhr(`${API_BASE}/posts/${id}`, {
       method: 'POST',
-      body: JSON.stringify(option)
+      body: JSON.stringify({ option })
     })
   },
 

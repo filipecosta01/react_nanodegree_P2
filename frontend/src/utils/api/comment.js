@@ -2,12 +2,6 @@ import { API_BASE, xhr } from '../../utils'
 
 export const CommentAPI = {
 
-  listAllComments(postId) {
-    return xhr(`${API_BASE}/posts/${postId}/comments`, {
-      method: 'GET'
-    })
-  },
-
   addPostComment(postComment) {
     return xhr(`${API_BASE}/comments`, {
       method: 'POST',
@@ -21,10 +15,10 @@ export const CommentAPI = {
     })
   },
 
-  votePostComment({ id, option }) {
+  votePostComment(id, option) {
     return xhr(`${API_BASE}/comments/${id}`, {
       method: 'POST',
-      body: JSON.stringify(option)
+      body: JSON.stringify({ option })
     })
   },
 
