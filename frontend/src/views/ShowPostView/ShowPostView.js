@@ -1,3 +1,7 @@
+/*
+  Show a unique post in their own page.
+  Comments are sorted by vote score top-bottom.
+*/
 import React, { Component } from 'react'
 
 import './ShowPostView.css'
@@ -85,7 +89,7 @@ export class ShowPostView extends Component {
   }
 
   handleOnSubmitForm = (data) => {
-    const { getPost, editPost } = this.props
+    const { editPost } = this.props
     const { post, ...otherProps } = data
 
     editPost(post.id, otherProps).then(() => this.setState({ isEditPostModalOpen: false, selectedPost: {} }))

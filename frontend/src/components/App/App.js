@@ -1,3 +1,8 @@
+/*
+  Main component. Can handle the routes, has a fixed navbar and main area to
+  display the content for each page/route.
+*/
+
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
 

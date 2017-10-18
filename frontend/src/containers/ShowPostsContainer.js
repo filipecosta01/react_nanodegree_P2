@@ -16,24 +16,21 @@ const headerInfo = (state, props) => {
   }
 }
 
-const stateComments = (state) => state.entities.comments
+/*
+  For all the posts to be passed as props to the view, iterate through the
+  list of posts and transform the current post object to contain a
+  human-readable date and sort by the selectable filter on the main page.
+  Finally return all the posts after all the steps above.
+*/
 
 const statePosts = (state, props) => {
   const category = props.category || ''
 
   const sortByProp = VOTE_SCORE.filter((fieldToFilter) => fieldToFilter.value === props.selectedFilter)[0]
-  // Return an array with all elements formated and comments as well...
   return Object.values(state.entities.posts)
     .map((post) => ({
       ...post,
-      postDate: moment(post.timestamp).format('DD/MM/YYYY HH:mm:ss'),
-      comments: Object.values(stateComments(state))
-      .filter((comment) => comment.parentId === post.id && !comment.deleted)
-      .map((comment) => ({
-        ...comment,
-        commentDate: moment(post.timestamp).format('DD/MM/YYYY HH:mm:ss')
-      }))
-      .sort(sortBy('voteScore'))
+      postDate: moment(post.timestamp).format('DD/MM/YYYY HH:mm:ss')
     }))
     .filter((post) => {
       if (post.deleted) {

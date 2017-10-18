@@ -1,3 +1,9 @@
+/*
+  Dumb component that has a Bootstrap Panel to show themselves and an individual
+  panel for each of the posts.
+  Show comments is controlled by the parent, passing down by props, as well other
+  props and functions they can have.
+*/
 import React, { Component } from 'react'
 
 import './Post.css'

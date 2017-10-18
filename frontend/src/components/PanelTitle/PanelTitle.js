@@ -1,3 +1,9 @@
+/*
+  Dumb component to keep the buttons we have on the Panel.
+  It does not care about the type of the element (post or comment), just
+  render the buttons according to props passed down by their parent.
+*/
+
 import React, { Component } from 'react'
 
 import './PanelTitle.css'

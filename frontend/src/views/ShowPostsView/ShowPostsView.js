@@ -1,3 +1,9 @@
+/*
+  Show all the posts in the main page.
+  Posts are filtered by their category and possibly by the selectable filter
+  in the navbar.
+*/
+
 import React, { Component } from 'react'
 
 import './ShowPostsView.css'

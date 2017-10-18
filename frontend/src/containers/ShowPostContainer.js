@@ -11,6 +11,13 @@ const statePosts = (state) => state.entities.posts
 const stateComments = (state) => state.entities.comments
 const stateCategories = (state) => Object.values(state.entities.categories)
 
+/*
+  Filter the post to be passed as props to the view according to the ID
+  on the URL.
+  Then transform the current post object to contain a human-readable date,
+  include the comments, sorted by the vote score, and finally get the first
+  element after all above.
+*/
 const statePost = (state, props) => {
   const postId = props.postId
   return Object.values(statePosts(state))

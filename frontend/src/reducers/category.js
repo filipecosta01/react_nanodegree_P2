@@ -7,11 +7,7 @@ import * as entities from './entities'
 import {
   GET_CATEGORIES,
   GET_CATEGORIES_FAILURE,
-  GET_CATEGORIES_SUCCESS,
-
-  GET_POSTS_FROM_CATEGORY,
-  GET_POSTS_FROM_CATEGORY_FAILURE,
-  GET_POSTS_FROM_CATEGORY_SUCCESS
+  GET_CATEGORIES_SUCCESS
 } from '../actions'
 
 /* Initial state default */
