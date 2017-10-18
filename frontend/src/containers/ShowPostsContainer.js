@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getPosts, getPostComments, voteOnPost } from '../reducers/post'
+import { getPosts, editPost, deletePost, getPostComments, voteOnPost } from '../reducers/post'
 
 import sortBy from 'sort-by'
 import moment from 'moment'
@@ -15,6 +15,8 @@ const headerInfo = (state, props) => {
     subtitle: element.label
   }
 }
+
+const stateCategories = (state) => Object.values(state.entities.categories)
 
 /*
   For all the posts to be passed as props to the view, iterate through the
@@ -49,12 +51,15 @@ const mapStateToProps = (state, props) => ({
   onLoad: props.onLoad,
   category: props.category,
   posts: statePosts(state, props),
+  categories: stateCategories(state),
   headerInfo: headerInfo(state, props),
   selectedFilter: props.selectedFilter
 })
 
 const mapActionCreators = {
   getPosts,
+  editPost,
+  deletePost,
   voteOnPost,
   getPostComments
 }

@@ -47,7 +47,7 @@ class App extends Component {
         </header>
 
         <section className="body-main-container">
-          <Route exact path="/" render={() => (
+          <Route exact path="/" render={({ history }) => (
             <ShowPosts selectedFilter={selectedFilter} />
           )}/>
           <Route path="/categories/:categoryName/posts" render={({ history, match }) => (
