@@ -154,6 +154,75 @@ const ACTION_HANDLERS = {
       addCommentVoteFailure: false,
       addCommentVoteSuccess: true
     }
+  }),
+
+  [ADD_COMMENT]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [ADD_COMMENT_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      addCommentFailure: true,
+      addCommentSuccess: false
+    }
+  }),
+  [ADD_COMMENT_SUCCESS]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      addCommentFailure: false,
+      addCommentSuccess: true
+    }
+  }),
+
+  [EDIT_COMMENT]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [EDIT_COMMENT_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      editCommentFailure: true,
+      editCommentSuccess: false
+    }
+  }),
+  [EDIT_COMMENT_SUCCESS]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      editCommentFailure: false,
+      editCommentSuccess: true
+    }
+  }),
+
+  [DELETE_COMMENT]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [DELETE_COMMENT_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      deleteCommentFailure: true,
+      deleteCommentSuccess: false
+    }
+  }),
+  [DELETE_COMMENT_SUCCESS]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      deleteCommentFailure: false,
+      deleteCommentSuccess: true
+    }
   })
 }
 
