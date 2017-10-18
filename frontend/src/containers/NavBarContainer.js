@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 
 import { getCategories } from '../reducers/category'
+import { addPost } from '../reducers/post'
 
 import NavBarView from '../views/NavBarView'
 
@@ -15,6 +16,7 @@ const mapStateToProps = (state, props) => ({
 })
   
 const mapActionCreators = {
+  addPost,
   getCategories
 }
 

@@ -5,15 +5,36 @@ import * as schemas from '../schemas'
 import * as entities from './entities'
 
 import {
+  ADD_COMMENT,
+  ADD_COMMENT_FAILURE,
+  ADD_COMMENT_SUCCESS,
+
   ADD_COMMENT_VOTE,
   ADD_COMMENT_VOTE_FAILURE,
-  ADD_COMMENT_VOTE_SUCCESS
+  ADD_COMMENT_VOTE_SUCCESS,
+
+  DELETE_COMMENT,
+  DELETE_COMMENT_FAILURE,
+  DELETE_COMMENT_SUCCESS,
+
+  EDIT_COMMENT,
+  EDIT_COMMENT_FAILURE,
+  EDIT_COMMENT_SUCCESS
 } from '../actions'
 
 /* Initial state default */
 export const initialState = {
   error: null,
   messages: {
+    addCommentFailure: false,
+    addCommentSuccess: false,
+    
+    deleteCommentFailure: false,
+    deleteCommentSuccess: false,
+
+    editCommentFailure: false,
+    editCommentSuccess: false,
+
     addCommentVoteFailure: false,
     addCommentVoteSuccess: false
   },
@@ -21,6 +42,39 @@ export const initialState = {
 }
 
 /* Actions */
+export const addComment = (comment) => async dispatch => {
+  dispatch({ type: ADD_COMMENT })
+
+  try {
+    const response = await CommentAPI.addPostComment(comment)
+    return addCommentSuccess({ response, dispatch })
+  } catch(error) {
+    dispatch({ type: ADD_COMMENT_FAILURE, error })
+  }
+}
+
+export const editComment = (id, data) => async dispatch => {
+  dispatch({ type: EDIT_COMMENT })
+
+  try {
+    const response = await CommentAPI.editPostComment(id, data)
+    return editCommentSuccess({ response, dispatch })
+  } catch(error) {
+    dispatch({ type: EDIT_COMMENT_FAILURE, error })
+  }
+}
+
+export const deleteComment = (id) => async dispatch => {
+  dispatch({ type: DELETE_COMMENT })
+
+  try {
+    const response = await CommentAPI.deletePostComment(id)
+    return deleteCommentSuccess({ response, dispatch })
+  } catch(error) {
+    dispatch({ type: DELETE_COMMENT_FAILURE, error })
+  }
+}
+
 export const voteOnComment = (commentId, voteType) => async dispatch => {
   dispatch({ type: ADD_COMMENT_VOTE })
 
@@ -33,6 +87,39 @@ export const voteOnComment = (commentId, voteType) => async dispatch => {
 }
 
 /* Actions Success */
+export const addCommentSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.comment )
+  const { comments } = normalized.entities
+
+  dispatch(entities.mergeComments(comments))
+
+  dispatch({ type: ADD_COMMENT_SUCCESS })
+
+  return normalized.result
+}
+
+export const editCommentSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.comment )
+  const { comments } = normalized.entities
+
+  dispatch(entities.mergeComments(comments))
+
+  dispatch({ type: EDIT_COMMENT_SUCCESS })
+
+  return normalized.result
+}
+
+export const deleteCommentSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.comment )
+  const { comments } = normalized.entities
+
+  dispatch(entities.mergeComments(comments))
+
+  dispatch({ type: DELETE_COMMENT_SUCCESS })
+
+  return normalized.result
+}
+
 export const voteOnCommentSuccess = ({ response, dispatch }) => {
   const normalized = normalize(response, schemas.comment )
   const { comments } = normalized.entities

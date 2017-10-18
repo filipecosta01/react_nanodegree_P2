@@ -35,7 +35,16 @@ const statePosts = (state, props) => {
       }))
       .sort(sortBy('voteScore'))
     }))
-    .filter((post) => !post.deleted && category && post.category === category || !category)
+    .filter((post) => {
+      if (post.deleted) {
+        return false
+      }
+      if (category && post.category !== category) {
+        return false
+      }
+
+      return true
+    })
     .sort(sortBy(`${sortByProp.postSortField}`))
 }
 

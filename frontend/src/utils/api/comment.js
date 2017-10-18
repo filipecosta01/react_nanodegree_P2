@@ -22,10 +22,10 @@ export const CommentAPI = {
     })
   },
 
-  editPostComment({ id, timestamp, body }) {
+  editPostComment(id, data) {
     return xhr(`${API_BASE}/comments/${id}`, {
       method: 'PUT',
-      body: JSON.stringify({ timestamp, body })
+      body: JSON.stringify(data)
     })
   },
 

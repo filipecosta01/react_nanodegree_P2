@@ -7,10 +7,9 @@ import Post from '../../components/Post'
 export class ShowPostsView extends Component {
 
   componentDidMount() {
-    const { getPosts, getPostComments } = this.props
+    const { getPosts } = this.props
 
     getPosts()
-      .then((results) => Promise.all(results.map((result) => getPostComments(result))))
   }
 
   onVote = (id, type, option) => {
@@ -37,6 +36,7 @@ export class ShowPostsView extends Component {
               <Post
                 post={post}
                 onVote={this.onVote}
+                linkTo={`/posts/${post.id}`}
               />
             </div>
           ))}

@@ -1,20 +1,19 @@
 import { connect } from 'react-redux'
-import { getPost, voteOnPost, getPostComments } from '../reducers/post'
-import { voteOnComment } from '../reducers/comment'
+import { getPost, editPost, deletePost, voteOnPost, getPostComments } from '../reducers/post'
+import { addComment, editComment, deleteComment, voteOnComment } from '../reducers/comment'
 
 import sortBy from 'sort-by'
 import moment from 'moment'
-
-import VOTE_SCORE from '../utils/VOTE_SCORE'
 
 import ShowPostView from '../views/ShowPostView'
 
 const statePosts = (state) => state.entities.posts
 const stateComments = (state) => state.entities.comments
+const stateCategories = (state) => Object.values(state.entities.categories)
 
 const statePost = (state, props) => {
   const postId = props.postId
-  return Object.values(state.entities.posts)
+  return Object.values(statePosts(state))
     .filter((post) => post.id === postId)
     .map((post) => ({
       ...post,
@@ -32,12 +31,19 @@ const statePost = (state, props) => {
 const mapStateToProps = (state, props) => ({
   onLoad: props.onLoad,
   postId: props.postId,
-  post: statePost(state, props)
+  history: props.history,
+  post: statePost(state, props),
+  categories: stateCategories(state)
 })
 
 const mapActionCreators = {
   getPost,
+  editPost,
   voteOnPost,
+  deletePost,
+  addComment,
+  editComment,
+  deleteComment,
   voteOnComment,
   getPostComments
 }

@@ -1,0 +1,42 @@
+.CreatePost {
+
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+
+  align-items: center;
+  background-color: rgba(28, 27, 24, 0.9);
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.Content {
+  padding: 30px;
+  outline: none;
+  flex: 1;
+  box-shadow: none;
+  border: none;
+  position: relative;
+  max-width: 590px;
+  background-color: rgb(188, 229, 245);
+}
+
+.Content > div {
+  border-radius: 1%;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.submit-button-container {
+  text-align: center;
+}
+
+.button-submit {
+  width: 50%;
+}

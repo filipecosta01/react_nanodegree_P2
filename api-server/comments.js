@@ -1,25 +1,46 @@
 const clone = require('clone')
+const posts = require('./posts')
 
 let db = {}
 
 const defaultData = {
-  "894tuq4ut84ut8v4t8wun89g": {
-    id: '894tuq4ut84ut8v4t8wun89g',
-    parentId: "8xf0y6ziyjabvozdd253nd",
+  "b79e05bb-b2f6-4ce4-96b7-53ce962e5cd1": {
+    id: 'b79e05bb-b2f6-4ce4-96b7-53ce962e5cd1',
+    parentId: "b79e05bb-b2f6-4ce4-96b7-53ce962e5cd0",
     timestamp: 1468166872634,
-    body: 'Hi there! I am a COMMENT.',
-    author: 'thingtwo',
-    voteScore: 6,
+    body: 'Hey there, I am gonna watch!',
+    author: 'skfan',
+    voteScore: 1,
     deleted: false,
     parentDeleted: false
   },
-  "8tu4bsun805n8un48ve89": {
-    id: '8tu4bsun805n8un48ve89',
-    parentId: "8xf0y6ziyjabvozdd253nd",
-    timestamp: 1469479767190,
-    body: 'Comments. Are. Cool.',
-    author: 'thingone',
-    voteScore: -5,
+  "b79e05bb-b2f6-4ce4-96b7-53ce962e5cd2": {
+    id: 'b79e05bb-b2f6-4ce4-96b7-53ce962e5cd2',
+    parentId: "b79e05bb-b2f6-4ce4-96b7-53ce962e5cd0",
+    timestamp: 1468166874034,
+    body: 'I am gonna miss the game... please share the results here!',
+    author: 'skfanboy',
+    voteScore: 1,
+    deleted: false,
+    parentDeleted: false
+  },
+  "a79e05bb-b2f6-4ce4-96b7-53ce962e5cd1": {
+    id: 'a79e05bb-b2f6-4ce4-96b7-53ce962e5cd1',
+    parentId: "a79e05bb-b2f6-4ce4-96b7-53ce962e5cd0",
+    timestamp: 1468166875034,
+    body: 'Faze is not playing that well... I dunno!',
+    author: 'fazefanboy',
+    voteScore: 1,
+    deleted: false,
+    parentDeleted: false
+  },
+  "c79e05bb-b2f6-4ce4-96b7-53ce962e5cd1": {
+    id: 'c79e05bb-b2f6-4ce4-96b7-53ce962e5cd1',
+    parentId: "c79e05bb-b2f6-4ce4-96b7-53ce962e5cd0",
+    timestamp: 1468196875034,
+    body: 'Please bring FNX onboard, Astralis!!!',
+    author: 'astralisfnxfanboy',
+    voteScore: 1,
     deleted: false,
     parentDeleted: false
   }
@@ -68,6 +89,7 @@ function add (token, comment) {
       parentDeleted: false
     }
 
+    posts.incrementCommentCounter(token, comment.parentId, 1)
     res(comments[comment.id])
   })
 }
@@ -104,6 +126,7 @@ function disable (token, id) {
     return new Promise((res) => {
       let comments = getData(token)
       comments[id].deleted = true
+      posts.incrementCommentCounter(token, comments[id].parentId, -1)
       res(comments[id])
     })
 }

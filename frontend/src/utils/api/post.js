@@ -34,10 +34,10 @@ export const PostAPI = {
     })
   },
 
-  editPost({ id, title, body }) {
+  editPost(id, data) {
     return xhr(`${API_BASE}/posts/${id}`, {
-      method: 'POST',
-      body: JSON.stringify({ title, body })
+      method: 'PUT',
+      body: JSON.stringify(data)
     })
   },
 

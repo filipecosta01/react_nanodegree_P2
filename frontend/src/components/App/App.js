@@ -45,11 +45,6 @@ class App extends Component {
           <Route exact path="/" render={() => (
             <ShowPosts selectedFilter={selectedFilter} />
           )}/>
-          <Route path="/create" render={({ history }) => (
-            <div>
-              Create post
-            </div>
-          )}/>
           <Route path="/categories/:categoryName/posts" render={({ history, match }) => (
             <ShowPosts
               onLoad={this.handleResetFilter}
@@ -59,7 +54,11 @@ class App extends Component {
           )
           }/>
           <Route path="/posts/:postId" render={({ history, match }) => (
-            <ShowPost onLoad={this.handleResetFilter} postId={match.params.postId} />
+            <ShowPost
+              history={history}
+              postId={match.params.postId}
+              onLoad={this.handleResetFilter}
+            />
           )}/>
         </section>
       </div>

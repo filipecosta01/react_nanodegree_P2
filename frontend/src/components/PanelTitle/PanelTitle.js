@@ -16,9 +16,13 @@ export class PanelTitle extends Component {
       leftSubtitle,
       rightSubtitle,
       
+      showAdd,
       showEditArea,
       showActionButtons,
 
+      onAdd,
+      onEdit,
+      onDelete,
       onUpVote,
       onDownVote
     } = this.props
@@ -35,7 +39,7 @@ export class PanelTitle extends Component {
             
             {leftSubtitle && (
             <div className="left-subtitle-container">
-                {leftSubtitle.map((subtitle) => <span>{subtitle}</span> )}
+                {leftSubtitle.map((subtitle) => <span key={subtitle}>{subtitle}</span> )}
               </div>
             )}
 
@@ -56,10 +60,20 @@ export class PanelTitle extends Component {
                   <FontAwesome.FaThumbsODown />
                 </Button>
 
+                {showAdd &&
+                  <Button
+                    bsStyle="success"
+                    className={"margin-right"}
+                    onClick={onAdd}
+                  >
+                    <FontAwesome.FaCommentO />
+                  </Button>
+                }
+
                 {linkTo &&
                   <Link to={linkTo}>
                     <Button bsStyle="success" className={showEditArea && "margin-right"}>
-                      Comments
+                      Details
                       {' '}
                       <FontAwesome.FaCommentsO />
                     </Button>
@@ -67,9 +81,9 @@ export class PanelTitle extends Component {
                 }
 
                 <Button
-                  bsStyle="secondary"
+                  bsStyle="default"
                   className={showEditArea ? "margin-right" : "hidden"}
-                  onClick={onDownVote}
+                  onClick={onEdit}
                 >
                   <FontAwesome.FaPencil />
                 </Button>
@@ -77,7 +91,7 @@ export class PanelTitle extends Component {
                 <Button
                   bsStyle="danger"
                   className={!showEditArea && "hidden"}
-                  onClick={onDownVote}
+                  onClick={onDelete}
                 >
                   <FontAwesome.FaTrashO />
                 </Button>

@@ -38,6 +38,10 @@ import {
 export const initialState = {
   error: null,
   messages: {
+
+    addPostFailure: false,
+    addPostSuccess: false,
+
     postsLoadedFailure: false,
     postsLoadedSuccess: false,
 
@@ -45,12 +49,54 @@ export const initialState = {
     addPostVoteSuccess: false,
 
     postLoadedFailure: false,
-    postLoadedSuccess: false
+    postLoadedSuccess: false,
+
+    editPostFailure: false,
+    editPostSuccess: false,
+
+    deletePostFailure: false,
+    deletePostSuccess: false,
+
+    postCommentsLoadedFailure: false,
+    postCommentsLoadedSuccess: false
   },
   isLoading: false
 }
 
 /* Actions */
+export const addPost = (post) => async dispatch => {
+  dispatch({ type: ADD_POST })
+
+  try {
+    const response = await PostAPI.addPost(post)
+    return addPostSuccess({ response, dispatch })
+  } catch (error) {
+    dispatch({ type: ADD_POST_FAILURE })
+  }
+}
+
+export const editPost = (id, data) => async dispatch => {
+  dispatch({ type: EDIT_POST })
+
+  try {
+    const response = await PostAPI.editPost(id, data)
+    return editPostSuccess({ response, dispatch })
+  } catch (error) {
+    dispatch({ type: EDIT_POST_FAILURE })
+  }
+}
+
+export const deletePost = (id) => async dispatch => {
+  dispatch({ type: DELETE_POST })
+
+  try {
+    const response = await PostAPI.deletePost(id)
+    return deletePostSuccess({ response, dispatch })
+  } catch (error) {
+    dispatch({ type: DELETE_POST_FAILURE })
+  }
+}
+
 export const getPosts = () => async dispatch => {
   dispatch({ type: GET_POSTS })
 
@@ -96,6 +142,39 @@ export const voteOnPost = (postId, voteType) => async dispatch => {
 }
 
 /* Actions Success */
+export const addPostSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.post)
+  const { posts } = normalized.entities
+
+  dispatch(entities.mergePosts(posts))
+
+  dispatch({ type: ADD_POST_SUCCESS })
+
+  return normalized.result
+}
+
+export const editPostSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.post)
+  const { posts } = normalized.entities
+
+  dispatch(entities.mergePosts(posts))
+
+  dispatch({ type: EDIT_POST_SUCCESS })
+
+  return normalized.result
+}
+
+export const deletePostSuccess = ({ response, dispatch }) => {
+  const normalized = normalize(response, schemas.post)
+  const { posts } = normalized.entities
+
+  dispatch(entities.mergePosts(posts))
+
+  dispatch({ type: DELETE_POST_SUCCESS })
+
+  return normalized.result
+}
+
 export const getPostsSuccess = ({ response, dispatch }) => {
   const normalized = normalize(response, [ schemas.post ] )
   const { posts } = normalized.entities
@@ -209,6 +288,75 @@ const ACTION_HANDLERS = {
       ...state.messages,
       addPostVoteFailure: false,
       addPostVoteSuccess: true
+    }
+  }),
+
+  [EDIT_POST]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [EDIT_POST_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      editPostFailure: true,
+      editPostSuccess: false
+    }
+  }),
+  [EDIT_POST_SUCCESS]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      editPostFailure: false,
+      editPostSuccess: true
+    }
+  }),
+
+  [DELETE_POST]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [DELETE_POST_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      deletePostFailure: true,
+      deletePostSuccess: false
+    }
+  }),
+  [DELETE_POST_SUCCESS]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      deletePostFailure: false,
+      deletePostSuccess: true
+    }
+  }),
+
+  [GET_POST_COMMENTS]: state => ({
+    error: null,
+    isLoading: true
+  }),
+  [GET_POST_COMMENTS_FAILURE]: (state, { error }) => ({
+    error,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      postCommentsLoadedFailure: true,
+      postCommentsLoadedSuccess: false
+    }
+  }),
+  [GET_POST_COMMENTS_FAILURE]: state => ({
+    error: null,
+    isLoading: false,
+    messages: {
+      ...state.messages,
+      postCommentsLoadedFailure: false,
+      postCommentsLoadedSuccess: true
     }
   })
 }
