@@ -9,7 +9,7 @@ import VOTE_SCORE from '../utils/VOTE_SCORE'
 import ShowPostsView from '../views/ShowPostsView'
 
 const headerInfo = (state, props) => {
-  const element = VOTE_SCORE.filter((scoreToFilter) => scoreToFilter.value === props.selectedFilter)[0]
+  const element = VOTE_SCORE.filter(scoreToFilter => scoreToFilter.value === props.selectedFilter)[0]
   return {
     title: props.category || 'All Categories',
     subtitle: element.label
