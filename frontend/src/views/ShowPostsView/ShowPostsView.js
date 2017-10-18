@@ -98,7 +98,7 @@ export class ShowPostsView extends Component {
                 showEditArea
                 onVote={this.onVote}
                 onEdit={this.onClickEdit}
-                linkTo={`/posts/${post.id}`}
+                linkTo={`/${post.category}/${post.id}`}
                 onDelete={this.onClickDelete}
               />
             </div>

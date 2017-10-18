@@ -58,11 +58,12 @@ class App extends Component {
             />
           )
           }/>
-          <Route path="/posts/:postId" render={({ history, match }) => (
+          <Route exact path="/:categoryName/:postId" render={({ history, match }) => (
             <ShowPost
               history={history}
               postId={match.params.postId}
               onLoad={this.handleResetFilter}
+              category={match.params.categoryName}
             />
           )}/>
         </section>
