@@ -36,7 +36,7 @@ export class ShowPostsView extends Component {
           <hr />
         </header>
         <section className="posts-container">
-          {posts.length === 0 && (<h5 className="white-text">No posts found</h5>)}
+          {posts.length === 0 && (<h4 className="red-text">{`> No posts found <`}</h4>)}
           {posts && posts.length > 0 && posts.map((post) => (
             <div key={post.id} className="post-element">
               <Post
